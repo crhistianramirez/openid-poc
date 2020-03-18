@@ -1,0 +1,23 @@
+{
+  "name": "openid-poc",
+  "version": "1.0.0",
+  "description": "This proof of concept shows you how you can use OrderCloud's OpenAPI feature to log in with google and get a valid OrderCloud token.",
+  "main": "index.js",
+  "scripts": {
+    "start": "serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crhistianramirez/openid-poc.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crhistianramirez/openid-poc/issues"
+  },
+  "homepage": "https://github.com/crhistianramirez/openid-poc#readme",
+  "dependencies": {
+    "serve": "^11.3.0"
+  }
+}

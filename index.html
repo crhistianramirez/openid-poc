@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const OPEN_ID_CONNECT_ID=""
+        const ORDERCLOUD_CLIENT_ID=""
+        const ORDERCLOUD_ROLES=[];
+        if(!OPEN_ID_CONNECT_ID) {
+            alert('Please define the OPEN_ID_CONNECT_ID, check out the README.md')
+        }
+        if(!ORDERCLOUD_CLIENT_ID) {
+            alert('Please define the ORDERCLOUD_CLIENT_ID, check out the README.md')
+        }
+        if(ORDERCLOUD_ROLES.length === 0) {
+            alert('Please define ORDERCLOUD_ROLES, check out the README.md')
+        }
+        
+        const queryString = window.location.search;
+        const queryParams = new URLSearchParams(queryString);
+        const orderCloudToken = queryParams.get('token');
+        if(!orderCloudToken) {
+            const openidurl = `https://auth.ordercloud.io/ocrplogin?id=${OPEN_ID_CONNECT_ID}&cid=${ORDERCLOUD_CLIENT_ID}&roles=${ORDERCLOUD_ROLES.join(' ')}`;
+
+            // kickstart openid connect flow
+            window.location.href = openidurl;
+        } else {
+            alert(`Success! You're logged and your ordercloud token is:\n\n${orderCloudToken}`);
+        }
+    </script>
+</body>
+</html>
