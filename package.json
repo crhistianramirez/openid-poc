@@ -4,7 +4,7 @@
   "description": "This proof of concept shows you how you can use OrderCloud's OpenAPI feature to log in with google and get a valid OrderCloud token.",
   "main": "index.js",
   "scripts": {
-    "start": "serve"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,11 @@
   },
   "homepage": "https://github.com/crhistianramirez/openid-poc#readme",
   "dependencies": {
-    "serve": "^11.3.0"
-  }
+    "axios": "^0.19.2",
+    "express": "^4.17.1",
+    "jwt-decode": "^2.2.0",
+    "ordercloud-javascript-sdk": "^4.0.0-12",
+    "uuid": "^7.0.3"
+  },
+  "devDependencies": {}
 }
