@@ -24,7 +24,7 @@
         const queryParams = new URLSearchParams(queryString);
         const orderCloudToken = queryParams.get('token');
         if(!orderCloudToken) {
-            const openidurl = `https://auth.ordercloud.io/ocrplogin?id=${OPEN_ID_CONNECT_ID}&cid=${ORDERCLOUD_CLIENT_ID}&roles=${ORDERCLOUD_ROLES.join(' ')}`;
+            const openidurl = `https://sandboxapi.ordercloud.io/ocrplogin?id=${OPEN_ID_CONNECT_ID}&cid=${ORDERCLOUD_CLIENT_ID}&roles=${ORDERCLOUD_ROLES.join(' ')}`;
 
             // kickstart openid connect flow
             window.location.href = openidurl;

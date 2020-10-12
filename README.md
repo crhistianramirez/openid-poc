@@ -2,14 +2,14 @@
 
 This proof of concept shows you how you can use OrderCloud's OpenAPI feature to log in with google and get a valid OrderCloud token.
 
-To get started, follow [google's instructions](https://developers.google.com/identity/protocols/oauth2/openid-connect) for setting up openid connect on their side and then follow the steps below. We'll need the `clientID` and `clientSecret` which OrderCloud will refer to as `ConnectClientID` and `ConnectClientSecret` respectively. On google's side you'll also need to set the authorized redirect URI to `https://auth.ordercloud.io/ocrpcode`
+To get started, follow [google's instructions](https://developers.google.com/identity/protocols/oauth2/openid-connect) for setting up openid connect on their side and then follow the steps below. We'll need the `clientID` and `clientSecret` which OrderCloud will refer to as `ConnectClientID` and `ConnectClientSecret` respectively. On google's side you'll also need to set the authorized redirect URI to `https://sandboxapi.ordercloud.io/ocrpcode`
 
 1. We'll need a publicly available endpoint for this. Instead of deploying something, we can use [ngrok](https://ngrok.com/). After installing ngrok run `ngrok http 4451`. This tells ngrok to expose our endpoint that lives on http://localhost:4451 to two public endpoints. After running the command copy either one of those urls we'll need it in step 2, keep ngrok running. If you close it you'll need to run it again which will generate a unique endpoint.
 
 2. In the API create a new [Integration Event](https://ordercloud.io/api-reference/seller/integration-events/create). Note the ngrok url below (yours will be different), we appended /integration-events to it.
 
     ```http
-    POST https://api.ordercloud.io/v1/openidconnects HTTP/1.1
+    POST https://sandboxapi.ordercloud.io/v1/openidconnects HTTP/1.1
     Authentication: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
     Content-Type: application/json; charset=UTF-8
 
@@ -28,7 +28,7 @@ To get started, follow [google's instructions](https://developers.google.com/ide
 3. In the API create a new [Open ID Connect](https://ordercloud.io/api-reference/authentication-and-authorization/open-id-connects/create)
 
     ```http
-    POST https://api.ordercloud.io/v1/integrationEvents HTTP/1.1
+    POST https://sandboxapi.ordercloud.io/v1/integrationEvents HTTP/1.1
     Authentication: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
 
     Content-Type: application/json; charset=UTF-8
