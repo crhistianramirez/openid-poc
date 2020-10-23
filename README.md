@@ -1,12 +1,12 @@
 # OpenID Connect with OrderCloud & Google
 
-This proof of concept shows you how you can use OrderCloud's OpenAPI feature to log in with google and get a valid OrderCloud token.
+This proof of concept shows you how you can use OrderCloud's OpenAPI feature to log in with google and get a valid OrderCloud token. The code samples here are written in javascript for simplicity. We're also using the sandbox environment. 
 
-To get started, follow [google's instructions](https://developers.google.com/identity/protocols/oauth2/openid-connect) for setting up openid connect on their side and then follow the steps below. We'll need the `clientID` and `clientSecret` which OrderCloud will refer to as `ConnectClientID` and `ConnectClientSecret` respectively. On google's side you'll also need to set the authorized redirect URI to `https://sandboxapi.ordercloud.io/ocrpcode`
+To get started, follow [google's instructions](https://developers.google.com/identity/protocols/oauth2/openid-connect) for setting up openid connect on their side and then follow the steps below. We'll need google's `clientID` and `clientSecret` which OrderCloud will refer to as `ConnectClientID` and `ConnectClientSecret` respectively. On google's side you'll also need to set the authorized redirect URI to `https://sandboxapi.ordercloud.io/ocrpcode`.
 
 1. We'll need a publicly available endpoint for this. Instead of deploying something, we can use [ngrok](https://ngrok.com/). After installing ngrok run `ngrok http 4451`. This tells ngrok to expose our endpoint that lives on http://localhost:4451 to two public endpoints. After running the command copy either one of those urls we'll need it in step 2, keep ngrok running. If you close it you'll need to run it again which will generate a unique endpoint.
 
-2. In the API create a new [Integration Event](https://ordercloud.io/api-reference/seller/integration-events/create). Note the ngrok url below (yours will be different), we appended /integration-events to it.
+2. In the API create a new [Integration Event](https://ordercloud.io/api-reference/seller/integration-events/create).
 
     ```http
     POST https://sandboxapi.ordercloud.io/v1/openidconnects HTTP/1.1
@@ -17,7 +17,7 @@ To get started, follow [google's instructions](https://developers.google.com/ide
         "ID": "openidconnect",
         "Name": "openidconnect",
         "EventType": "OpenIDConnect",
-        "CustomImplementationUrl": "https://e1c85891.ngrok.io/integration-events",
+        "CustomImplementationUrl": "{your-ngrok-url}/integration-events",
         "HashKey": "supersecrethash",
         "ElevatedRoles": [
             "FullAccess"
@@ -60,7 +60,7 @@ To get started, follow [google's instructions](https://developers.google.com/ide
     | `IntegrationEventID`    | The ID to the Integration Event created in step 2. This has information about which endoint ordercloud should call out to in order to create the user after the user has successfully logged in.                                                                                                                                   |
     | `AdditionalIdpScopes`   | Any additional scopes (roles) you'd like to request from the IDP at the time of authentication. As an example you could request permissions from google to access user's google drive files, then the access token you get back from the IDP would have permission to do that.                                                                                                                             |
 
-4. Set the following values in the index.html
+4. Set the following values in the index.html. These
     - `OPEN_ID_CONNECT_ID` - the ID to the Open ID Connect configuration you created on OrderCloud
     - `ORDERCLOUD_CLIENT_ID` - the clientID that wants to authenticate via OpenID connect
     - `ORDERCLOUD_ROLES` - the roles to request, only roles that are also part of the security profile will be granted
