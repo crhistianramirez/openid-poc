@@ -49,7 +49,7 @@ app.post('/integration-events/createuser', (req, res) => {
 
 // this endpoint gets called by the OrderCloud API whenever a user needs to get a new ordercloud token via openidconnect AFTER the first attempt
 // it is responsible for updating user details in ordercloud when they have changed in the idp
-app.post('/integration-events/createuser', (req, res) => {
+app.post('/integration-events/syncuser', (req, res) => {
     const body = req.body;
 
     // The ordercloud user associated with this IDP
