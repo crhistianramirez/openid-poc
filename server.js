@@ -13,11 +13,11 @@ app.use(express.json())
 // It is responsible for associating a user from the idp with a user from ordercloud and expects a username be returned
 app.post('/integration-events/createuser', (req, res) => {
     const body = req.body;
-    OrderCloud.Tokens.SetAccessToken(body.OrderCloudAccessToken)
+    OrderCloud.Tokens.SetAccessToken(body.OrderCloudAccessToken);
 
     // The claims (user details) from parsing the idp's ID token
     const claims = parseJwt(body.TokenResponse.id_token);
-    console.log(claims)
+    console.log(`User claims decoded from the IDP's ID token`, claims);
 
     // We get an access token from the IDP which can be used to call out to the idp's api
     // in google's case we could pass along additional claims and upload something using google drive api for example
