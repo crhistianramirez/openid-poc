@@ -7,29 +7,29 @@
 </head>
 <body>
     <script>
-        const OPEN_ID_CONNECT_ID=""
+         /**
+         * Please review these settings to ensure they match what you have in your marketplace
+         */
         const ORDERCLOUD_CLIENT_ID=""
-        const ORDERCLOUD_ROLES=[];
-        if(!OPEN_ID_CONNECT_ID) {
-            alert('Please define the OPEN_ID_CONNECT_ID, check out the README.md')
-        }
+        const ORDERCLOUD_BASE_API_URL='https://sandboxapi.ordercloud.io'
+        const ORDERCLOUD_OPEN_ID_CONNECT_ID="google"
+        const ORDERCLOUD_ROLES=['Shopper'];
         if(!ORDERCLOUD_CLIENT_ID) {
             alert('Please define the ORDERCLOUD_CLIENT_ID, check out the README.md')
-        }
-        if(ORDERCLOUD_ROLES.length === 0) {
-            alert('Please define ORDERCLOUD_ROLES, check out the README.md')
         }
         
         const queryString = window.location.search;
         const queryParams = new URLSearchParams(queryString);
         const orderCloudToken = queryParams.get('token');
+        const idpToken = queryParams.get('idpToken');
         if(!orderCloudToken) {
-            const openidurl = `https://sandboxapi.ordercloud.io/ocrplogin?id=${OPEN_ID_CONNECT_ID}&cid=${ORDERCLOUD_CLIENT_ID}&roles=${ORDERCLOUD_ROLES.join(' ')}`;
+            const openidurl = `${ORDERCLOUD_BASE_API_URL}/ocrplogin?id=${ORDERCLOUD_OPEN_ID_CONNECT_ID}&cid=${ORDERCLOUD_CLIENT_ID}&roles=${ORDERCLOUD_ROLES.join(' ')}`;
 
             // kickstart openid connect flow
+            console.log(openidurl);
             window.location.href = openidurl;
         } else {
-            alert(`Success! You're logged and your ordercloud token is:\n\n${orderCloudToken}`);
+            alert(`Success! You're logged and your ordercloud token is:\n\n${orderCloudToken} \n\n and your IDP token is: \n\n ${idpToken}`);
         }
     </script>
 </body>
